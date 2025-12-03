@@ -21,28 +21,76 @@ INSERT INTO `videogame`
 (`id`, `title`, `genre`, `description`, `coverimage`, `platform`, `year`)
 VALUES
 (1, 'The Legend of Zelda: Breath of the Wild', 'Action-Adventure',
-'Open-world game developed by Nintendo featuring exploration and puzzle-solving.',
-'https://example.com/images/zelda.jpg', 'Nintendo Switch', 2017),
+'Open-world adventure game developed by Nintendo.',
+'https://upload.wikimedia.org/wikipedia/en/0/0e/The_Legend_of_Zelda_Breath_of_the_Wild.jpg',
+'Nintendo Switch', 2017),
 
 (2, 'Elden Ring', 'RPG',
-'A dark fantasy action RPG created by FromSoftware with an open world.',
-'https://example.com/images/eldenring.jpg', 'PC / PS5 / Xbox', 2022),
+'Dark fantasy open-world RPG created by FromSoftware.',
+'https://upload.wikimedia.org/wikipedia/en/b/b9/Elden_Ring_Box_art.jpg',
+'PC / PS5 / Xbox', 2022),
 
 (3, 'Minecraft', 'Sandbox',
-'A block-building sandbox game where players create and explore infinite worlds.',
-'https://example.com/images/minecraft.jpg', 'All Platforms', 2011),
+'Sandbox block-building game with infinite exploration.',
+'https://upload.wikimedia.org/wikipedia/en/5/51/Minecraft_cover.png',
+'All Platforms', 2011),
 
 (4, 'GTA V', 'Action',
-'An open-world crime adventure game set in Los Santos with three main characters.',
-'https://example.com/images/gtav.jpg', 'PC / PS / Xbox', 2013),
+'Open-world crime adventure game set in Los Santos.',
+'https://upload.wikimedia.org/wikipedia/en/a/a5/Grand_Theft_Auto_V.png',
+'PC / PS / Xbox', 2013),
 
 (5, 'Fortnite', 'Battle Royale',
-'A fast-paced online battle royale game with building mechanics.',
-'https://example.com/images/fortnite.jpg', 'PC / PS / Xbox / Switch', 2017);
+'A fast-paced online battle royale game with building.',
+'https://upload.wikimedia.org/wikipedia/en/0/09/Fortnite_cover.jpg',
+'PC / PS / Xbox / Switch', 2017),
 
--- Add primary key + auto-increment
-ALTER TABLE `videogame`
-  ADD PRIMARY KEY (`id`);
+(6, 'Red Dead Redemption 2', 'Action-Adventure',
+'A western-themed open-world adventure by Rockstar.',
+'https://upload.wikimedia.org/wikipedia/en/4/44/Red_Dead_Redemption_II.jpg',
+'PC / PS4 / Xbox', 2018),
 
-ALTER TABLE `videogame`
-  MODIFY `id` INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+(7, 'Cyberpunk 2077', 'RPG',
+'Sci-fi open-world RPG in Night City.',
+'https://upload.wikimedia.org/wikipedia/en/9/9f/Cyberpunk_2077_box_art.jpg',
+'PC / PS5 / Xbox', 2020),
+
+(8, 'God of War (2018)', 'Action',
+'Norse mythology action game following Kratos and Atreus.',
+'https://upload.wikimedia.org/wikipedia/en/a/a7/God_of_War_4_cover.jpg',
+'PS4 / PS5', 2018),
+
+(9, 'Horizon Zero Dawn', 'Action RPG',
+'Explore a world filled with robotic creatures.',
+'https://upload.wikimedia.org/wikipedia/en/4/42/Horizon_Zero_Dawn.jpg',
+'PC / PS4', 2017),
+
+(10, 'The Witcher 3: Wild Hunt', 'RPG',
+'A story-rich RPG following Geralt of Rivia.',
+'https://upload.wikimedia.org/wikipedia/en/0/0c/Witcher_3_cover_art.jpg',
+'PC / PS / Xbox / Switch', 2015),
+
+(11, 'Super Mario Odyssey', 'Platformer',
+'A 3D Mario platformer with creative world exploration.',
+'https://upload.wikimedia.org/wikipedia/en/8/8d/Super_Mario_Odyssey.jpg',
+'Nintendo Switch', 2017),
+
+(12, 'Call of Duty: Modern Warfare II', 'FPS',
+'Fast-paced military first-person shooter.',
+'https://upload.wikimedia.org/wikipedia/en/8/89/Call_of_Duty_Modern_Warfare_II_2022.jpg',
+'PC / PS5 / Xbox', 2022),
+
+(13, 'Apex Legends', 'Battle Royale',
+'A hero-based battle royale with fast mobility.',
+'https://upload.wikimedia.org/wikipedia/en/d/db/Apex_legends_cover.jpg',
+'PC / PS / Xbox / Switch', 2019),
+
+(14, 'Valorant', 'FPS',
+'A tactical shooter with unique agent abilities.',
+'https://upload.wikimedia.org/wikipedia/en/5/5f/Valorant_cover_art.jpg',
+'PC', 2020),
+
+(15, 'League of Legends', 'MOBA',
+'A competitive 5v5 multiplayer online battle arena game.',
+'https://upload.wikimedia.org/wikipedia/en/7/77/League_of_Legends_logo.png',
+'PC', 2009);
