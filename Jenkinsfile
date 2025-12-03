@@ -122,11 +122,13 @@ EOF
                     sh """
                         docker compose ps
 
+                        API_HOST=${API_HOST}
+
                         # Wait for API to be ready (max 180 seconds)
-                        timeout 180 bash -c 'until curl -f http://localhost:3001/health; do sleep 2; done' || exit 1
+                        timeout 180 bash -c "until curl -f ${API_HOST}/health; do sleep 2; done" || exit 1
 
                         # Check videogames endpoint
-                        curl -f http://localhost:3001/videogames || exit 1
+                        curl -f ${API_HOST}/videogames || exit 1
 
                         echo "Health check passed!"
                     """
@@ -139,6 +141,10 @@ EOF
                 script {
                     echo "Verifying all services..."
 
+                    def apiHost = params.API_HOST
+                    def hostOnly = apiHost.replaceAll(/^https?:\/\//, '').split('/')[0]
+                    def host = hostOnly.contains(':') ? hostOnly.split(':')[0] : hostOnly
+
                     sh """
                         echo "=== Container Status ==="
                         docker compose ps
@@ -149,9 +155,9 @@ EOF
 
                         echo ""
                         echo "=== Deployed Services ==="
-                        echo "Frontend: http://localhost:3000"
-                        echo "API: http://localhost:3001"
-                        echo "phpMyAdmin: http://localhost:8888"
+                        echo "Frontend: http://${host}:3000"
+                        echo "API: ${apiHost}"
+                        echo "phpMyAdmin: http://${host}:8888"
                     """
                 }
             }
@@ -164,10 +170,14 @@ EOF
             echo "Build: ${BUILD_TAG}"
             echo "Commit: ${GIT_COMMIT_SHORT}"
             echo ""
+            def apiHost = params.API_HOST
+            def hostOnly = apiHost.replaceAll(/^https?:\/\//, '').split('/')[0]
+            def host = hostOnly.contains(':') ? hostOnly.split(':')[0] : hostOnly
+
             echo "Access your application:"
-            echo "  - Frontend: http://localhost:3000"
-            echo "  - API: http://localhost:3001"
-            echo "  - phpMyAdmin: http://localhost:8888"
+            echo "  - Frontend: http://${host}:3000"
+            echo "  - API: ${apiHost}"
+            echo "  - phpMyAdmin: http://${host}:8888"
         }
 
         failure {

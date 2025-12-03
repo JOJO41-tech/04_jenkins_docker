@@ -5,6 +5,9 @@ CREATE DATABASE IF NOT EXISTS dit312_6703466
 
 USE dit312_6703466;
 
+-- Drop table if it already exists (prevents errors when re-running)
+DROP TABLE IF EXISTS `videogame`;
+
 -- Create table: videogame
 CREATE TABLE `videogame` (
   `id` INT(11) NOT NULL,
@@ -94,3 +97,10 @@ VALUES
 'A competitive 5v5 multiplayer online battle arena game.',
 'https://upload.wikimedia.org/wikipedia/en/7/77/League_of_Legends_logo.png',
 'PC', 2009);
+
+-- Add primary key + auto-increment
+ALTER TABLE `videogame`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `videogame`
+  MODIFY `id` INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
