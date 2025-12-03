@@ -119,19 +119,16 @@ EOF
 
                     echo "Performing health check..."
 
-                    sh """
+                    sh '''
                         docker compose ps
 
-                        API_HOST=${API_HOST}
+                        API_HOST="${API_HOST:-http://localhost:3001}"
 
-                        # Wait for API to be ready (max 180 seconds)
-                        timeout 180 bash -c "until curl -f ${API_HOST}/health; do sleep 2; done" || exit 1
-
-                        # Check videogames endpoint
-                        curl -f ${API_HOST}/videogames || exit 1
+                        timeout 180 bash -c "until curl -f \"$API_HOST\"/health; do sleep 2; done" || exit 1
+                        curl -f "$API_HOST"/videogames || exit 1
 
                         echo "Health check passed!"
-                    """
+                    '''
                 }
             }
         }
@@ -166,18 +163,21 @@ EOF
 
     post {
         success {
-            echo "✅ Deployment completed successfully!"
-            echo "Build: ${BUILD_TAG}"
-            echo "Commit: ${GIT_COMMIT_SHORT}"
-            echo ""
-            def apiHost = params.API_HOST
-            def hostOnly = apiHost.replaceAll(/^https?:\/\//, '').split('/')[0]
-            def host = hostOnly.contains(':') ? hostOnly.split(':')[0] : hostOnly
+            script {
+                echo "✅ Deployment completed successfully!"
+                echo "Build: ${BUILD_TAG}"
+                echo "Commit: ${GIT_COMMIT_SHORT}"
+                echo ""
 
-            echo "Access your application:"
-            echo "  - Frontend: http://${host}:3000"
-            echo "  - API: ${apiHost}"
-            echo "  - phpMyAdmin: http://${host}:8888"
+                def apiHost = params.API_HOST
+                def hostOnly = apiHost.replaceAll(/^https?:\/\//, '').split('/')[0]
+                def host = hostOnly.contains(':') ? hostOnly.split(':')[0] : hostOnly
+
+                echo "Access your application:"
+                echo "  - Frontend: http://${host}:3000"
+                echo "  - API: ${apiHost}"
+                echo "  - phpMyAdmin: http://${host}:8888"
+            }
         }
 
         failure {
